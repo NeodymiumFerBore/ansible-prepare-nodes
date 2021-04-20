@@ -1,0 +1,22 @@
+---
+- name: Create DevOps User
+  user:
+    name: "{{ devops_user }}"
+    state: present
+
+- name: Add DevOps to sudoers
+  lineinfile:
+    path: "/etc/sudoers.d/{{ devops_user }}"
+    line: "{{ devops_user }}        ALL=(ALL) NOPASSWD:ALL"
+    state: present
+    create: true
+    owner: root
+    group: root
+    mode: '0440'
+    validate: /usr/sbin/visudo -cf %s
+
+- name: Set authorized key
+  authorized_key:
+    user: "{{ devops_user }}"
+    state: present
+    key: "{{ lookup('file', '{{ devops_public_key }}') }}"

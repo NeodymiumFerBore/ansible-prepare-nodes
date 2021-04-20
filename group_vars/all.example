@@ -1,0 +1,2 @@
+devops_user: "myuser"
+devops_public_key: "/home/myuser/.ssh/id_rsa.pub"
