@@ -15,7 +15,7 @@ Playbook that will prepare remote nodes to be managed with Ansible
 
 ## Usage
 
-Change `devops_user` and `devops_public_key` variables to fit your environment.
+Change `devops_user` and `devops_public_key` variables in `group_vars/all` to fit your environment.
 
 Then execute the playbook (warning: the affected nodes will reboot!)
 
