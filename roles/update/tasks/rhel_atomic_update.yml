@@ -1,3 +1,8 @@
+- name: Update RHEL Atomic Host repo metadata
+  shell: rpm-ostree refresh-md
+  register: refresh_md_res
+  failed_when: refresh_md_res.rc != 0
+
 - name: Update RHEL Atomic Host
   community.general.atomic_host:
     revision: latest
