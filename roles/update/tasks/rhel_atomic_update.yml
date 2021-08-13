@@ -1,0 +1,3 @@
+- name: Update RHEL Atomic Host
+  community.general.atomic_host:
+    revision: latest

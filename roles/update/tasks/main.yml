@@ -1,5 +1,12 @@
 - name: Update
+# Debian/Ubuntu: apt dist-upgrade
   include_tasks: apt.yml
-  when: ansible_facts['distribution'] == "Debian" or ansible_facts['distribution'] == "Ubuntu"
+  when: ansible_facts['distribution'] == "Debian" or  ansible_facts['distribution'] == "Ubuntu"
+
+# RHEL/CentOS: yum update
 - include_tasks: yum.yml
-  when: ansible_facts['distribution'] == "CentOS" or ansible_facts['distribution'] == "RedHat"
+  when: (ansible_facts['distribution'] == "CentOS" or  ansible_facts['distribution'] == "RedHat") and ansible_facts['cmdline']['ostree'] is not defined
+
+# RHEL Atomic Host: atomic host upgrade
+- include_tasks: rhel_atomic_update.yml
+  when: ansible_facts['distribution'] == "RedHat" and ansible_facts['cmdline']['ostree'] is defined
